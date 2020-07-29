@@ -43,7 +43,7 @@ on this domain.
 paths_allowed("https://collections.ed.ac.uk/art)")
 ```
 
-# Getting started
+# Prepare at home
 
 ## Clone your repo
 
@@ -96,10 +96,13 @@ lab that each file will be used for:
 |  |- 02-scrape-page-function.R   # functions
 |  |- 03-scrape-page-many.R       # iteration
 ```
-  
-# Webscraping
+# Warm-up
 
-## SelectorGadget
+# Workshop exercises
+
+## Webscraping
+
+### SelectorGadget
 
 For this lab, please use Google Chrome as your web browser. If you are using the 
 one of the computers in the computer lab, you can access Google Chrome by 
@@ -117,7 +120,7 @@ knitr::include_graphics("img/selectorgadget.png")
 You should now be able to access SelectorGadget by clicking on the icon next to 
 the search bar in the Chrome browser.
 
-## Scraping a single page
+### Scraping a single page
 
 ```{marginfigure}
 **Tip:** To run the code you can highlight or put your cursor next to the lines of code you want to run and hit Command+Enter.
@@ -145,7 +148,7 @@ page <- read_html(first_url)
 For the ten pieces on this page we will extract `title`, `artist`, and `link` 
 information, and put these three variables in a data frame.
 
-### Titles
+#### Titles
 
 Let's start with titles. We make use of the SelectorGadget to identify the 
 tags for the relevant nodes:
@@ -193,7 +196,7 @@ titles <- page %>%
   str_squish()
 ```
 
-### Links
+#### Links
 
 The same nodes that contain the text for the titles also contains information 
 on the links to individual art piece pages for each title. We can extract this 
@@ -233,22 +236,22 @@ first argument is passed in from the pipeline, so you just need to define the
 of the webpage it takes you to. How does that url compare to what we scraped 
 above? How is it different? Using `str_replace()`, fix the URLs.
 
-### Artists
+#### Artists
 
 2. Fill in the blanks to scrape artist names.
 
-### Put it altogether
+#### Put it altogether
 
 3. Fill in the blanks to organize everything in a tibble.
 
-### Scrape the next page
+#### Scrape the next page
 
 4. Click on the next page, and grab its url. Fill in the blank in 
 to define a new object: `second_url`. Copy-paste code from top of the R script 
 to scrape the new set of art pieces, and save the resulting data frame as 
 `second_ten`.
 
-## Functions
+### Functions
 
 <div class="box">
 Work in `scripts/02-scrape-page-function.R`.
@@ -307,7 +310,7 @@ scrape_page(first_url)
 scrape_page(second_url)
 ```
 
-## Iteration
+### Iteration
 
 <div class="box">
 Work in `scripts/03-scrape-page-many.R`.
@@ -326,7 +329,7 @@ and write some code that applies the `scrape_page()` function to each page, and
 combines the resulting data frames from each page into a single data frame with 
 2909 rows and 3 columns.
 
-### List of URLs
+#### List of URLs
 
 Click through the first few of the pages in the art collection and observe their 
 URLs to confirm the following pattern:
@@ -348,7 +351,7 @@ sequence of numbers.
 
 7. Fill in the blanks to construct the list of URLs. 
 
-### Mapping
+#### Mapping
 
 Finally, we're ready to iterate over the list of URLs we constructed. We will do 
 this by **map**ping the function we developed over the list of URLs. There are 
@@ -370,12 +373,12 @@ map_dfr(urls, scrape_page)
 8. Fill in the blanks to scrape all pages, and to create a new data frame called 
 `uoe_art`.
 
-### Write out data
+#### Write out data
 
 9. Finally write out the data frame you constructed into the `data` folder so 
 that you can use it in the analysis section.
 
-# Analysis
+## Analysis
 
 <div class="box">
 Work in `lab-06-uoe-art.Rmd` for the rest of the lab.
@@ -441,3 +444,5 @@ how you might capture titles where the word appears as "child" and "Child".
 
 15. Final question! How many art pieces have the word "child" in their title? See 
 if you can figure it out, and ask for help if not.
+
+# Wrapping up
